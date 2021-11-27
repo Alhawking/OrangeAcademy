@@ -60,7 +60,8 @@ function validateForm(){
         }else{
             const files = document.querySelector('#inputGroupFile04').files;
             if(files){
-                readFileAsync(files[0])
+                    readFileAsync(files[0])
+                    .then(res =>sendFile(res))
                     .then(console.log);
             }else{
                 form.submit();
@@ -85,36 +86,21 @@ function readFileAsync(file){
     })
 }
 
-function getBase64(file){
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function() {
-        //prepare data to pass to processing page 
-        const fileEncoded = reader.result;
-        console.log(fileEncoded);
-        const base64enc = fileEncoded.split(";base64,")[1];
-        const fullFileName = document.querySelector("#inputGroupFile04").files[0].name;
-        const fileName = fullFileName.split(".")[0];
-        const assetName = fullFileName.split(".")[1];
-
-        return new Promise((resolve, reject) => {
-            fetch("https://cloud.orangedcx.com.mx/test-api-i", {  //provide URL of the processing page
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    base64enc: base64enc,
-                    fileName: fileName,
-                    assetName: assetName
-                })
-            })
-            .then(function(res) {
-                    resolve(res);
-            })
-            .catch(function(err) {
-                reject(err);
-            });
+function sendFile(res){
+    const fileEncoded = res;
+    const base64enc = fileEncoded.split(";base64,")[1];
+    const fullFileName = document.querySelector("#inputGroupFile04").files[0].name;
+    const fileName = fullFileName.split(".")[0];
+    const assetName = fullFileName.split(".")[1];
+    return fetch("https://cloud.orangedcx.com.mx/test-api-i", {  //provide URL of the processing page
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            base64enc: base64enc,
+            fileName: fileName,
+            assetName: assetName
         })
-    };
+    })
 }
