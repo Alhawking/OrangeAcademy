@@ -10,7 +10,7 @@
 <script runat="server">
     Platform.Load("Core","1.1.1");
     try {
-        Write('Actualizado 3');
+        Write('Actualizado 4');
         var tenantId = Variable.GetValue("@tenantId");
         var config = {
             endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token",
@@ -26,6 +26,7 @@
                     "expires":expirationDate
                 }
             }else{
+                Write('Ejecutando else')
                 var result = requestToken();
                 var upsert = storeToke(result);
             }
