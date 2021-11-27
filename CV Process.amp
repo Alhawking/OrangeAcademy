@@ -51,7 +51,7 @@
             var rows = Platform.Function.UpsertDate(
                 'APIIntegrations',
                 ["Nombre"],["CVs"],
-                ["Token","ExpirationDate"],[result.token,result.expires]
+                ["Token","ExpirationDate"],['result.token','result.expires']
             )
             Write('Guardado exitoso');
         }
