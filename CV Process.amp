@@ -9,15 +9,33 @@
 ]%%
 <script runat="server">
     Platform.Load("Core","1.1.1");
-        Write('Actualizado 6');
+        Write('Actualizado 7');
         var tenantId = Variable.GetValue("@tenantId");
         var config = {
             endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token",
             localDate:  DateTime.SystemDateToLocalDate(Now())
         }
     try {
-        var token = retrievetoken();
-        Write(token.token);
+         //fetch posted data
+        var jsonData = Platform.Request.GetPostData();
+        var obj = Platform.Function.ParseJSON(jsonData);
+        //prepare data for API call
+        var base64enc = obj.base64enc;
+        var fileName = obj.fileName;
+        var assetName = obj.assetName;
+        var result = retrievetoken();
+        var headerNames = ["Authorization"];
+        var headerValues = ["Bearer " + result.token];
+        var assetTypeID = 127
+        var jsonBody = {
+            "name": fileName,
+            "assetType": {
+                "name": assetName,
+                "id": assetTypeID
+            },
+            "file": base64enc
+        };
+        HTTP.Post(result.url, "application/json", Stringify(jsonBody), headerNames, headerValues);
     } catch (e) {
         Write(Stringify(e));
     }
