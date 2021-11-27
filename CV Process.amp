@@ -33,6 +33,7 @@
                 "name": assetName,
                 "id": assetTypeID
             },
+            "Category":{id:"23587"},
             "file": base64enc
         };
         var resp = HTTP.Post('https://mc8jcbs17csh5mwmtvv9b1n4r6yq.rest.marketingcloudapis.com/asset/v1/content/assets', "application/json", Stringify(jsonBody), headerNames, headerValues);
