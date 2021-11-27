@@ -24,6 +24,7 @@
                 Write("Getting new token");
             }
         }
+        retrievetoken();
     } catch (e) {
         Write(Stringify(e));
     }
