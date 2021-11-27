@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded',()=>{
     addSmoothScroll();
     validateForm();
+    console.log('Cargado')
 });
 
 function addSmoothScroll(){
