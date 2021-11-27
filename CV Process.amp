@@ -9,7 +9,7 @@
 ]%%
 <script runat="server">
     Platform.Load("Core","1.1.1");
-        Write('Actualizado 7');
+        Write('Actualizado 8');
         var tenantId = Variable.GetValue("@tenantId");
         var config = {
             endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token",
