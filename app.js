@@ -59,7 +59,7 @@ function validateForm(){
             });
         }else{
             const files = document.querySelector('#inputGroupFile04').files;
-            if(files){
+            if(files.length >0){
                 const newInput = document.createElement('input');
                 newInput.type = 'hidden';
                 newInput.name = 'path';
