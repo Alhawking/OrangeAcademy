@@ -10,7 +10,7 @@
 <script runat="server">
     Platform.Load("Core","1.1.1");
     try {
-        Write('Actualizado 2');
+        Write('Actualizado 3');
         var tenantId = Variable.GetValue("@tenantId");
         var config = {
             endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token",
@@ -20,7 +20,6 @@
             var oldToken = Variable.GetValue("@oldToken");
             var expirationDate = Variable.GetValue("@expirationDate");
             if(oldToken != null && (new Date(config.localDate) < new Date(expirationDate))){
-                Write('El token está vigente')
                 return {
                     "token":Variable.GetValue("@oldToken"),
                     "url":"https://"+tenantId+".rest.marketingcloudapis.com/",
@@ -50,14 +49,24 @@
             }
         }
         function storeToke(result){
-            Write('Ejecutando')
             var rows = Platform.Function.UpsertData(
                 'APIIntegrations',
                 ["Nombre"],["CVs"],
-                ["Token","ExpirationDate"],[result.token,result.expires]
+                ["Token","ExpirationDate"],[encrypt(result.token),result.expires]
             )
         }
-        
+        function encrypt(str) {
+
+        Variable.SetValue("@ToEncrypt", str)
+
+        var scr = "";
+            scr += "\%\%[";
+            scr += "SET @Encrypted = Base64Encode(@ToEncrypt, 'UTF-8')";
+            scr += "Output(Concat(@Encrypted))";
+            scr += "]\%\%";
+
+        return Platform.Function.TreatAsContent(scr);
+    }
         retrievetoken();
     } catch (e) {
         Write(Stringify(e));
