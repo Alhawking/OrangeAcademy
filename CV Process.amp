@@ -12,9 +12,18 @@
     try {
         var tenantId = Variable.GetValue("@tenantId");
         var config = {
-            endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token"
+            endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token",
+            localDate:  DateTime.SystemDateToLocalDate(Now())
         }
-        Write(config.endpoint);
+        function retrievetoken(){
+            var oldToken = Variable.GetValue("@oldToken");
+            var expirationDate = Variable.GetValue("@expirationDate");
+            if(oldToken != null && (new Date(config.localDate) < new Date(expirationDate))){
+                
+            }else{
+                Write("Getting new token");
+            }
+        }
     } catch (e) {
         Write(Stringify(e));
     }
