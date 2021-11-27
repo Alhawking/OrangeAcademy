@@ -68,7 +68,7 @@ function validateForm(){
         }
         setTimeout(()=>{
             document.querySelectorAll('.alert-danger').forEach(div =>div.style.display = 'none')
-        },3000);
+        },3000); 
     });
 }
 
