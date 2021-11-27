@@ -12,7 +12,7 @@
     try {
         var tenantId = Variable.GetValue("@tenantId");
         var config = {
-            endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token",
+            endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token"
         }
         Write(config.endpoint);
     } catch (e) {
