@@ -42,9 +42,9 @@
                 var parsedDate = new Date(config.localDate);
                 var expirationDate = new Date(parsedDate.getTime() + (result.expires_in * 1000));
                 return {
-                    "token": result.access_token,
-                    "url": result.rest_instance_url,
-                    "expires": expirationDate
+                    token: result.access_token,
+                    url: result.rest_instance_url,
+                    expires: expirationDate
                 }
             }
         }
