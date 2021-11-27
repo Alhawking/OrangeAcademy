@@ -1,1 +1,9 @@
-%%[]%%
+%%[
+    SET @lookup = LookUpRows('APIIntegrations','Nombre','CVs')
+    SET @rowResult = Row(@lookup,1)
+    SET @clientId = Base64Decode(Field(@rowResult,'Client Id'),'UTF-8')
+    SET @clientSecret = Base64Decode(Field(@rowResult,'Client Secret'),'UTF-8')
+    SET @tenantId = Field(@rowResult,'Tenant Id')
+    SET @oldToken = Field(@rowResult,'Token')
+    SET @expirationDate = Field(@rowResult,'ExpirationDate')
+]%%
