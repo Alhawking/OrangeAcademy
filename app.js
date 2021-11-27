@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded',()=>{
     addSmoothScroll();
     validateForm();
-    console.log('Cargado')
 });
 
 function addSmoothScroll(){
@@ -61,8 +60,8 @@ function validateForm(){
         }else{
             const files = document.querySelector('#inputGroupFile04').files;
             if(files){
-                getBase64(files[0])
-                    .finally(()=>form.submit());
+                readFileAsync(files[0])
+                    .then(console.log);
             }else{
                 form.submit();
             }
@@ -73,11 +72,23 @@ function validateForm(){
     });
 }
 
+function readFileAsync(file){
+    return new Promise((resolve, reject) =>{
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function() {
+            resolve(reader.result);
+        };
+        reader.onerror = function(e) {
+            reject(e);
+        }
+    })
+}
+
 function getBase64(file){
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function() {
-
         //prepare data to pass to processing page 
         const fileEncoded = reader.result;
         console.log(fileEncoded);
