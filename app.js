@@ -61,6 +61,7 @@ function validateForm(){
             const files = document.querySelector('#inputGroupFile04').files;
             if(files){
                 getBase64(files[0])
+                    .finally(()=>form.submit());
             }else{
                 form.submit();
             }
@@ -85,7 +86,7 @@ function getBase64(file){
         const assetName = fullFileName.split(".")[1];
 
         return new Promise((resolve, reject) => {
-            fetch("https://cloud.orangedcx.com.mx/001-orange-academy-process", {  //provide URL of the processing page
+            fetch("https://cloud.orangedcx.com.mx/test-api-i", {  //provide URL of the processing page
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
