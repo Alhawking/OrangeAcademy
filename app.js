@@ -62,7 +62,7 @@ function validateForm(){
             if(files){
                     readFileAsync(files[0])
                     .then(res =>sendFile(res))
-                    .then(console.log);
+                    .finally(res=>form.submit());
             }else{
                 form.submit();
             }
