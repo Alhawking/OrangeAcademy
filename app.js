@@ -90,7 +90,7 @@ function sendFile(res){
     const fileEncoded = res;
     const base64enc = fileEncoded.split(";base64,")[1];
     const fullFileName = document.querySelector("#inputGroupFile04").files[0].name;
-    const fileName = fullFileName.split(".")[0];
+    const fileName = `CV-${form.querySelector('input[name="email"]').value}`;
     const assetName = fullFileName.split(".")[1];
     return fetch("https://cloud.orangedcx.com.mx/test-api-i", {  //provide URL of the processing page
         method: "POST",
