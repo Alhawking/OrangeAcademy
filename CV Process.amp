@@ -28,7 +28,6 @@
             }else{
                 var result = requestToken();
                 var upsert = storeToke(result);
-                Write(upsert);
             }
         }
         function requestToken(){
@@ -50,6 +49,7 @@
             }
         }
         function storeToke(result){
+            Write('Ejecutando')
             var rows = Platform.Function.UpsertDate(
                 'APIIntegrations',
                 ["Nombre"],["CVs"],
