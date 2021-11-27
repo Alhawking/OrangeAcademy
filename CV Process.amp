@@ -27,7 +27,7 @@
             }else{
                 var result = requestToken();
                 //var upsert = storeToke(result);
-                Write('Guardado');
+                Write(result.token);
             }
         }
         function requestToken(){
