@@ -9,7 +9,7 @@
 ]%%
 <script runat="server">
     Platform.Load("Core","1.1.1");
-        Write('Actualizado 8');
+        Write('Actualizado 9');
         var tenantId = Variable.GetValue("@tenantId");
         var config = {
             endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token",
@@ -35,7 +35,7 @@
             },
             "file": base64enc
         };
-        var resp = HTTP.Post(result.url, "application/json", Stringify(jsonBody), headerNames, headerValues);
+        var resp = HTTP.Post('https://mc8jcbs17csh5mwmtvv9b1n4r6yq.rest.marketingcloudapis.com/asset/v1/content/assets', "application/json", Stringify(jsonBody), headerNames, headerValues);
         Write(resp)
     } catch (e) {
         Write(Stringify(e));
