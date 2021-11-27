@@ -26,8 +26,8 @@
                 }
             }else{
                 var result = requestToken();
-                //var upsert = storeToke(result);
-                Write(result.token);
+                var upsert = storeToke(result);
+                Write(upsert);
             }
         }
         function requestToken(){
