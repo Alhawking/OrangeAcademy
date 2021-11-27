@@ -50,7 +50,7 @@
         }
         function storeToke(result){
             Write('Ejecutando')
-            var rows = Platform.Function.UpsertDate(
+            var rows = Platform.Function.UpsertData(
                 'APIIntegrations',
                 ["Nombre"],["CVs"],
                 ["Token","ExpirationDate"],[result.token,result.expires]
