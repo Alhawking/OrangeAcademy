@@ -10,7 +10,7 @@
 <script runat="server">
     Platform.Load("Core","1.1.1");
     try {
-        Write('Actualizado 1');
+        Write('Actualizado 2');
         var tenantId = Variable.GetValue("@tenantId");
         var config = {
             endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token",
@@ -20,6 +20,7 @@
             var oldToken = Variable.GetValue("@oldToken");
             var expirationDate = Variable.GetValue("@expirationDate");
             if(oldToken != null && (new Date(config.localDate) < new Date(expirationDate))){
+                Write('El token está vigente')
                 return {
                     "token":Variable.GetValue("@oldToken"),
                     "url":"https://"+tenantId+".rest.marketingcloudapis.com/",
