@@ -7,3 +7,15 @@
     SET @oldToken = Field(@rowResult,'Token')
     SET @expirationDate = Field(@rowResult,'ExpirationDate')
 ]%%
+<script runat="server">
+    Platform.Load("Core","1.1.1");
+    try {
+        var tenantId = Variable.GetValue("@tenantId");
+        var config = {
+            endpoint: "https://"+tenantId+".auth.marketingcloudapis.com/v2/token",
+        }
+        Write(config.endpoint);
+    } catch (e) {
+        Write(Stringify(e));
+    }
+</script>
