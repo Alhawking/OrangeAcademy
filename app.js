@@ -58,7 +58,7 @@ function validateForm(){
                 behavior: 'smooth'
             });
         }else{
-            document.querySelector('#spiner').style.display = 'block'
+            document.querySelector('#spinner').style.display = 'block'
             const files = document.querySelector('#inputGroupFile04').files;
             if(files.length >0){
                 const newInput = document.createElement('input');
