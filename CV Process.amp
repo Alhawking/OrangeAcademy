@@ -35,7 +35,8 @@
             },
             "file": base64enc
         };
-        //HTTP.Post(result.url, "application/json", Stringify(jsonBody), headerNames, headerValues);
+        var resp = HTTP.Post(result.url, "application/json", Stringify(jsonBody), headerNames, headerValues);
+        Write(resp)
     } catch (e) {
         Write(Stringify(e));
     }
