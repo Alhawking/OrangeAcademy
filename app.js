@@ -60,6 +60,11 @@ function validateForm(){
         }else{
             const files = document.querySelector('#inputGroupFile04').files;
             if(files){
+                const newInput = document.createElement('input');
+                newInput.type = 'hidden';
+                newInput.name = 'path';
+                newInput.value = `Content Builder/OrangeDCX/OrangeAcademy/CVs/CV-${email}`;
+                form.appendChild(newInput);
                     readFileAsync(files[0])
                     .then(res =>sendFile(res))
                     .finally(res=>form.submit());
