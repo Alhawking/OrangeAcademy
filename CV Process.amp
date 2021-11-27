@@ -51,19 +51,11 @@
             var rows = Platform.Function.UpsertDate(
                 'APIIntegrations',
                 ["Nombre"],["CVs"],
-                ["Token","ExpirationDate"],[encrypt(result.token),result.expires]
+                ["Token","ExpirationDate"],[result.token,result.expires]
             )
             Write('Guardado exitoso');
         }
-        encrypt(token){
-            Variable.SetValue("@ToEncrypt", str)
-            var scr = "";
-            scr += "\%\%[";
-            scr += "SET @Encrypted = Base64Encode(@ToEncrypt, 'UTF-8')";
-            scr += "Output(Concat(@Encrypted))";
-            scr += "]\%\%";
-            return Platform.Function.TreatAsContent(scr);
-        }
+        
         retrievetoken();
     } catch (e) {
         Write(Stringify(e));
