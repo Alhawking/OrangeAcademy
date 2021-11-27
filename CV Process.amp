@@ -19,9 +19,32 @@
             var oldToken = Variable.GetValue("@oldToken");
             var expirationDate = Variable.GetValue("@expirationDate");
             if(oldToken != null && (new Date(config.localDate) < new Date(expirationDate))){
-                
+                return {
+                    "token":Variable.GetValue("@oldToken"),
+                    "url":"https://"+tenantId+".rest.marketingcloudapis.com/",
+                    "expires":expirationDate
+                }
             }else{
-                Write("Getting new token");
+                var result = requestToken();
+                Write(result);
+            }
+        }
+        function requestToken(){
+            var payload = {
+                "grant_type": "client_credentials",
+                "client_id": Variable.GetValue("@clientId"),
+                "client_secret": Variable.GetValue("@clientSecret"),
+            }
+            var request = HTTP.Post(config.endpoint,"application/json",Stringify(payload));
+            if(request.StatusCode == 200){
+                var result = Platform.Function.ParseJSON(request.Response[0]);
+                var parsedDate = new Date(config.localDate);
+                var expirationDate = new Date(parsedDate.getTime() + (result.expires_in * 1000));
+                return {
+                    "token": result.access_token,
+                    "url": result.rest_instance_url,
+                    "expires": expirationDate
+                }
             }
         }
         retrievetoken();
