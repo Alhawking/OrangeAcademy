@@ -33,7 +33,7 @@
             var payload = {
                 "grant_type": "client_credentials",
                 "client_id": Variable.GetValue("@clientId"),
-                "client_secret": Variable.GetValue("@clientSecret"),
+                "client_secret": Variable.GetValue("@clientSecret")
             }
             var request = HTTP.Post(config.endpoint,"application/json",Stringify(payload));
             if(request.StatusCode == 200){
