@@ -98,7 +98,7 @@ function sendFile(res){
     const fullFileName = document.querySelector("#inputGroupFile04").files[0].name;
     const fileName = `CV-${document.querySelector('input[name="email"]').value}`;
     const assetName = fullFileName.split(".")[1];
-    return fetch("https://cloud.orangedcx.com.mx/test-api-i", {  //provide URL of the processing page
+    return fetch("https://cloud.orangedcx.com.mx/upload-cv", {  //provide URL of the processing page
         method: "POST",
         headers: {
             "Content-Type": "application/json"
